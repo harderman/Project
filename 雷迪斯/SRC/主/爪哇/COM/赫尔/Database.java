@@ -9,11 +9,6 @@ public class Database {
     private static Map<String, List<String>> lists = new HashMap<>();
     private static Map<String,Map<String,String>> hashes = new HashMap<>();
     public static List<String> getList(String key) {
-        /*
-        List<String> list = lists.computeIfAbsent(key, k -> {
-            return new ArrayList<>();
-        });
-         */
         List<String> list =  lists.get(key);
         if (list == null) {
             list = new ArrayList<>();
