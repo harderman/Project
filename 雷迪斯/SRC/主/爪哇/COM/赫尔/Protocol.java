@@ -15,7 +15,6 @@ public class Protocol {
 
     public static Command readCommand(InputStream is) throws Exception {
         Object o  = read(is);
-        // 作为 Server 来说，一定不会收到 "+OK\r\n"
         if (!(o instanceof List)) {
             throw new Exception("the order type must is Array ");
         }
@@ -64,17 +63,8 @@ public class Protocol {
 
         byte[] r = new byte[len];
         is.read(r, 0, len);
-        /*
-        for (int i = 0; i < len; i++) {
-            int b = is.read();
-            r[i] = (byte)b;
-        }
-        */
-
-        // "$5\r\nhello\r\n";
         is.read();
         is.read();
-
         return r;
     }
 
@@ -210,10 +200,8 @@ public class Protocol {
     public static void writeInteger(OutputStream os, long v) throws IOException {
         // v = 10
         //:10\r\n
-
         // v = -1
         //:-1\r\n
-
         os.write(':');
         os.write(String.valueOf(v).getBytes());
         os.write("\r\n".getBytes());
